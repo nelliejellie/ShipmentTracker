@@ -6,6 +6,10 @@ const images = {
   scan: require("./scan.png"),
   wallet: require("./wallet.png"),
   profile: require("./profile.png"),
+  shippexhome: require("./shippexhome.png"),
+  bell: require("./bell.png"),
+  man: require("./man.png"),
+  shippy: require("./shippy.png"),
 };
 
 export default images;

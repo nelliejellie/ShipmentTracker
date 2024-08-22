@@ -16,6 +16,7 @@ import Back from "@/assets/icons/Back";
 import Input from "@/components/Auth/Input";
 import Toast from "react-native-toast-message";
 import { UseloginHook } from "@/Networking/hooks/useLoginHook";
+import { ScrollView } from "react-native-gesture-handler";
 
 const SplashFour = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -87,67 +88,71 @@ const SplashFour = ({ navigation }) => {
         }}
       >
         <View style={styles.modalOverlay}>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={styles.modalView}
-          >
-            <View style={{ flex: 1 }}>
-              <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => setModalVisible(false)}
-              >
-                <Back />
-                <Text style={{ color: "#2F50C1" }}>Cancel</Text>
-              </TouchableOpacity>
+          <ScrollView>
+            <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              style={styles.modalView}
+            >
+              <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                  style={styles.backButton}
+                  onPress={() => setModalVisible(false)}
+                >
+                  <Back />
+                  <Text style={{ color: "#2F50C1" }}>Cancel</Text>
+                </TouchableOpacity>
 
-              <Text style={styles.headerText}>Login</Text>
-              <Text style={styles.modalText}>
-                Please enter your First, Last name and your phone number in
-                order to register!
-              </Text>
-              <Toast />
-              <Input
-                label="URL"
-                value={url}
-                onChangeText={(text: string) => handleInputChange("url", text)}
-              />
-              <Input
-                label="Username / Email"
-                value={username}
-                onChangeText={(text: string) =>
-                  handleInputChange("username", text)
-                }
-              />
-              <Input
-                label="Password"
-                value={password}
-                onChangeText={(text: string) =>
-                  handleInputChange("password", text)
-                }
-                secureTextEntry={true}
-              />
-            </View>
+                <Text style={styles.headerText}>Login</Text>
+                <Text style={styles.modalText}>
+                  Please enter your First, Last name and your phone number in
+                  order to register!
+                </Text>
+                <Toast />
+                <Input
+                  label="URL"
+                  value={url}
+                  onChangeText={(text: string) =>
+                    handleInputChange("url", text)
+                  }
+                />
+                <Input
+                  label="Username / Email"
+                  value={username}
+                  onChangeText={(text: string) =>
+                    handleInputChange("username", text)
+                  }
+                />
+                <Input
+                  label="Password"
+                  value={password}
+                  onChangeText={(text: string) =>
+                    handleInputChange("password", text)
+                  }
+                  secureTextEntry={true}
+                />
+              </View>
 
-            <View style={[styles.buttonContainerTwo]}>
-              {error ? (
-                <ButtonComponent
-                  title="Login"
-                  onPress={() => {}}
-                  backgroundColor="#EAE7F2"
-                  color="#fff"
-                  loading={false}
-                />
-              ) : (
-                <ButtonComponent
-                  title="Login"
-                  onPress={handleLogin}
-                  backgroundColor="#2F50C1"
-                  color="#fff"
-                  loading={loading}
-                />
-              )}
-            </View>
-          </KeyboardAvoidingView>
+              <View style={[styles.buttonContainerTwo]}>
+                {error ? (
+                  <ButtonComponent
+                    title="Login"
+                    onPress={() => {}}
+                    backgroundColor="#EAE7F2"
+                    color="#fff"
+                    loading={false}
+                  />
+                ) : (
+                  <ButtonComponent
+                    title="Login"
+                    onPress={handleLogin}
+                    backgroundColor="#2F50C1"
+                    color="#fff"
+                    loading={loading}
+                  />
+                )}
+              </View>
+            </KeyboardAvoidingView>
+          </ScrollView>
         </View>
       </Modal>
       <View style={styles.splashThreeContainer}>
