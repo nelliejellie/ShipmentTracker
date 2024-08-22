@@ -64,7 +64,7 @@ const SplashFour = ({ navigation }) => {
       };
       const res = await postLogin(payload);
       if (res.message === "Logged In") {
-        navigation.replace("Home");
+        navigation.replace("Tabs");
       }
     } catch (error) {
       Toast.show({
