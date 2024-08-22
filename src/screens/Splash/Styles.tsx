@@ -33,10 +33,10 @@ export const styles = StyleSheet.create({
     marginBottom: 30,
   },
   buttonContainerTwo: {
-    backgroundColor: "#fff",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: 30,
+    flex: 1,
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "flex-end",
   },
   modalOverlay: {
     flex: 1,
@@ -49,6 +49,7 @@ export const styles = StyleSheet.create({
     margin: 20,
     width: "100%",
     backgroundColor: "white",
+    flexDirection: "column",
     borderRadius: 10,
     padding: 20,
     shadowColor: "#000",

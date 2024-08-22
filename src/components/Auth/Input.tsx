@@ -69,6 +69,11 @@ const styles = StyleSheet.create({
     borderColor: "#2F50C1", // Change border color to blue when focused
     borderWidth: 1,
   },
+  prefix: {
+    fontSize: 16,
+    color: "#000",
+    paddingRight: 5, // Add some space between the prefix and the input text
+  },
 });
 
 export default Input;

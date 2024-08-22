@@ -5,6 +5,7 @@ import SplashFour from "@/screens/Splash/SplashFour";
 import SplashThree from "@/screens/Splash/SplashThree";
 import SplashTwo from "@/screens/Splash/SplashTwo";
 import React from "react";
+import Home from "@/screens/Home/Home";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="SplashFour"
           component={SplashFour}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

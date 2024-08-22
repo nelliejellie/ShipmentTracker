@@ -3,4 +3,5 @@ export interface ButtonComponentProps {
   onPress: () => void;
   backgroundColor?: string;
   color: string;
+  loading: boolean;
 }
