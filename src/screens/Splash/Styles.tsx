@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#2F50C1",
   },
   splashThreeImage: {
-    width: "90%",
+    width: "60%",
     height: 40,
     margin: 10,
   },
@@ -42,6 +42,7 @@ export const styles = StyleSheet.create({
     height: Platform.OS === "ios" ? containerHeightIOS : containerHeightAndroid,
     flexDirection: "column",
     justifyContent: "flex-end",
+    alignItems: "center",
   },
   modalOverlay: {
     flex: 1,
@@ -51,12 +52,14 @@ export const styles = StyleSheet.create({
   },
   modalView: {
     flex: 1,
-    margin: 20,
+    marginTop: 20,
+    paddingTop: 10,
     width: "100%",
     backgroundColor: "white",
     flexDirection: "column",
+    alignItems: "center",
     borderRadius: 10,
-    padding: 20,
+    paddingHorizontal: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -84,14 +87,17 @@ export const styles = StyleSheet.create({
     textAlign: "left",
     color: "#757281",
     marginTop: 10,
+    marginLeft: 5,
   },
   backButton: {
     flexDirection: "row",
     gap: 10,
+    marginRight: 10,
   },
   headerText: {
     fontWeight: "bold",
     fontSize: 30,
     marginTop: 10,
+    marginLeft: 5,
   },
 });

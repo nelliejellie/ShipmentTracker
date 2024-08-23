@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     height: 40,
   },
   shippeximage: {
-    width: 250,
+    width: 50,
     height: 40,
   },
   nameText: {

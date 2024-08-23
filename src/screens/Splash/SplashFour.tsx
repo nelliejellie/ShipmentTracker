@@ -94,14 +94,21 @@ const SplashFour = ({ navigation }) => {
             style={styles.modalView}
           >
             <ScrollView>
+              <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => setModalVisible(false)}
+              >
+                <Back />
+                <Text style={{ color: "#2F50C1" }}>Cancel</Text>
+              </TouchableOpacity>
               <View style={{ flex: 1 }}>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={styles.backButton}
                   onPress={() => setModalVisible(false)}
                 >
                   <Back />
                   <Text style={{ color: "#2F50C1" }}>Cancel</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 <Text style={styles.headerText}>Login</Text>
                 <Text style={styles.modalText}>

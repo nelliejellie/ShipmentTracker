@@ -153,10 +153,10 @@ const Home = () => {
           style={styles.manImage}
         />
         <View>
-          <Text style={styles.textHeader}>SHIPPEX</Text>
+          <Text style={styles.textHeader}>S SHIPPEX</Text>
         </View>
         {/* <Image
-          source={images.shippy} // Path to your local image
+          source={images.shippex} // Path to your local image
           style={styles.shippeximage}
           resizeMode="cover"
         /> */}
