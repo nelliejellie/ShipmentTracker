@@ -10,6 +10,7 @@ const images = {
   bell: require("./bell.png"),
   man: require("./man.png"),
   shippy: require("./shippy.png"),
+  box: require("./box.png"),
 };
 
 export default images;

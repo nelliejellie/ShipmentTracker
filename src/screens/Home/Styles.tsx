@@ -28,4 +28,25 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 30,
   },
+  iconButtonContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  shipmentTextContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 30,
+  },
+  markContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 5,
+  },
+  textContainer: {
+    fontWeight: "bold",
+    fontSize: 20,
+  },
 });

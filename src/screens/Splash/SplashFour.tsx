@@ -88,11 +88,11 @@ const SplashFour = ({ navigation }) => {
         }}
       >
         <View style={styles.modalOverlay}>
-          <ScrollView>
-            <KeyboardAvoidingView
-              behavior={Platform.OS === "ios" ? "padding" : "height"}
-              style={styles.modalView}
-            >
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.modalView}
+          >
+            <ScrollView>
               <View style={{ flex: 1 }}>
                 <TouchableOpacity
                   style={styles.backButton}
@@ -151,8 +151,8 @@ const SplashFour = ({ navigation }) => {
                   />
                 )}
               </View>
-            </KeyboardAvoidingView>
-          </ScrollView>
+            </ScrollView>
+          </KeyboardAvoidingView>
         </View>
       </Modal>
       <View style={styles.splashThreeContainer}>
