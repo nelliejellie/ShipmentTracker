@@ -1,12 +1,20 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 
 const ScanScreen = () => {
   return (
-    <View>
-      <Text>ScanScreen</Text>
+    <View style={styles.container}>
+      <Text>ScanScreen is coming soon</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default ScanScreen;

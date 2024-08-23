@@ -67,7 +67,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <RenderBottomTab
               focused={focused}
-              name="Home"
+              name="Scan"
               activeIcon={images.scan}
               icon={images.scan}
             />
@@ -82,7 +82,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <RenderBottomTab
               focused={focused}
-              name="Home"
+              name="Wallet"
               activeIcon={images.wallet}
               icon={images.wallet}
             />
@@ -97,7 +97,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <RenderBottomTab
               focused={focused}
-              name="Home"
+              name="Profile"
               activeIcon={images.profile}
               icon={images.profile}
             />
