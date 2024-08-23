@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Modal } from "react-native";
 import React from "react";
 import images from "@/assets/images";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";

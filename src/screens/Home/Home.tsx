@@ -1,4 +1,11 @@
-import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  Modal,
+} from "react-native";
 import { styles } from "./Styles";
 import React, { useState, useEffect } from "react";
 import images from "@/assets/images";
@@ -7,9 +14,11 @@ import IconButton from "@/components/IconButton";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import ListItem from "@/components/ListItem";
 import { useGetShipments } from "@/Networking/hooks/useGetShipments";
+import ShipmentStatusComponent from "@/components/ShipmentStatusComponent";
 
 const Home = () => {
   const [textSearch, setTextSearch] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
   const { getShipments } = useGetShipments();
   const getData = async () => {
     const payload = {
@@ -26,28 +35,47 @@ const Home = () => {
     }));
     setData(newData);
   };
-  const [data, setData] = useState([
-    {
-      from: "Cairo",
-      to: "Alexandria",
-      status: "DELIVERED",
-      title: "AWB",
-      refno: "123453636",
-    },
-    {
-      from: "New York",
-      to: "Los Angeles",
-      status: "RECIEVED",
-      title: "AWB",
-      refno: "987654321",
-    },
-    // Add more data items as needed
-  ]);
+  const [data, setData] = useState([]);
   useEffect(() => {
     getData();
   }, []);
   return (
     <View style={styles.container}>
+      <Modal
+        animationType="slide" // Can be "slide", "fade", or "none"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <TouchableOpacity
+          style={styles.centeredView}
+          onPress={() => setModalVisible(!modalVisible)}
+        >
+          <View style={styles.modalView}>
+            <View style={styles.headerModal}>
+              <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <Text style={{ color: "#2F50C1", fontSize: 16 }}>Cancel</Text>
+              </TouchableOpacity>
+              <Text style={styles.modalText}>Filters</Text>
+              <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <Text style={{ color: "#2F50C1", fontSize: 16 }}>Done</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.shipmentstatusText}>SHIPMENT STATUS</Text>
+            <View style={styles.shipmentstatuscontainer}>
+              <ShipmentStatusComponent text="Received" />
+              <ShipmentStatusComponent text="Putaway" />
+              <ShipmentStatusComponent text="Delivered" />
+              <ShipmentStatusComponent text="Canceled" />
+              <ShipmentStatusComponent text="Rejected" />
+              <ShipmentStatusComponent text="Lost" />
+              <ShipmentStatusComponent text="On-hold" />
+            </View>
+          </View>
+        </TouchableOpacity>
+      </Modal>
       <View style={styles.header}>
         <Image
           source={images.man} // Path to your local image
@@ -77,7 +105,9 @@ const Home = () => {
           iconName="Filter"
           backgroundColor="#F4F2F8"
           color=""
-          onPress={() => {}}
+          onPress={() => {
+            setModalVisible(true);
+          }}
         />
         <IconButton
           title="Add Scan"
