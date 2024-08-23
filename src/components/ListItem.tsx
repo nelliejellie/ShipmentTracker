@@ -30,7 +30,16 @@ const ListItem: React.FC<ListItemComponentProps> = ({
           <Text style={styles.route}>{to}</Text>
         </View>
       </View>
-      <Text>{status}</Text>
+      {status === "RECIEVED" && (
+        <Text style={styles.recievedStatus}>{status}</Text>
+      )}
+      {status === "CANCELED" && (
+        <Text style={styles.canceledStatus}>{status}</Text>
+      )}
+      {status === "ERROR" && <Text style={styles.errorStatus}>{status}</Text>}
+      {status === "DELIVERED" && (
+        <Text style={styles.deliveredStatus}>{status}</Text>
+      )}
       <Fontisto name="arrow-resize" size={20} color="#2F50C1" />
     </View>
   );
@@ -60,6 +69,27 @@ const styles = StyleSheet.create({
   },
   route: {
     fontSize: 10,
+  },
+  recievedStatus: {
+    backgroundColor: "#d9e6fd",
+    color: "#4463c8",
+    padding: 3,
+    borderRadius: 4,
+  },
+  canceledStatus: {
+    color: "#e0dee7",
+  },
+  errorStatus: {
+    color: "#993037",
+    backgroundColor: "#b29f95",
+    padding: 3,
+    borderRadius: 4,
+  },
+  deliveredStatus: {
+    color: "#5A8959",
+    backgroundColor: "#9FAF96",
+    padding: 3,
+    borderRadius: 4,
   },
 });
 export default ListItem;

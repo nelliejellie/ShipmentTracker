@@ -65,7 +65,7 @@ const Home = () => {
         <ListItem
           from="Cairo"
           to="Alexandria"
-          status="Recieved"
+          status="DELIVERED"
           title="AWB"
           refno="123453636"
         />
