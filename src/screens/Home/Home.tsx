@@ -20,6 +20,16 @@ const Home = () => {
   const [textSearch, setTextSearch] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const { getShipments } = useGetShipments();
+  const [data, setData] = useState([]);
+
+  const filteredData = data.filter(
+    (item) =>
+      item.from.toLowerCase().includes(textSearch.toLowerCase()) ||
+      item.to.toLowerCase().includes(textSearch.toLowerCase()) ||
+      item.status.toLowerCase().includes(textSearch.toLowerCase()) ||
+      item.refno.toLowerCase().includes(textSearch.toLowerCase())
+  );
+
   const getData = async () => {
     const payload = {
       doctype: "AWB",
@@ -35,7 +45,7 @@ const Home = () => {
     }));
     setData(newData);
   };
-  const [data, setData] = useState([]);
+
   useEffect(() => {
     getData();
   }, []);
@@ -130,7 +140,7 @@ const Home = () => {
       </View>
       <View>
         <FlatList
-          data={data}
+          data={filteredData}
           keyExtractor={(item) => item.refno}
           renderItem={({ item }) => (
             <ListItem
