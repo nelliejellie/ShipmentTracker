@@ -12,14 +12,11 @@ const ListItem: React.FC<ListItemComponentProps> = ({
   from,
   to,
   refno,
+  marker,
 }) => {
   return (
     <View style={styles.container}>
-      <MaterialCommunityIcons
-        name="checkbox-blank-outline"
-        size={24}
-        color="#757281"
-      />
+      <MaterialCommunityIcons name={marker} size={24} color="#757281" />
       <Image source={images.box} style={{ width: 30, height: 30 }} />
       <View>
         <Text style={styles.title}>{title}</Text>

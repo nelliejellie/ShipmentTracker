@@ -19,6 +19,7 @@ import ShipmentStatusComponent from "@/components/ShipmentStatusComponent";
 const Home = () => {
   const [textSearch, setTextSearch] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [marker, setMarker] = useState("checkbox-blank-outline");
   const { getShipments } = useGetShipments();
   const [data, setData] = useState([]);
 
@@ -129,14 +130,19 @@ const Home = () => {
       </View>
       <View style={styles.shipmentTextContainer}>
         <Text style={styles.textContainer}>Shipments</Text>
-        <View style={styles.markContainer}>
-          <MaterialCommunityIcons
-            name="checkbox-blank-outline"
-            size={24}
-            color="#757281"
-          />
+        <TouchableOpacity
+          style={styles.markContainer}
+          onPress={() => {
+            if (marker === "checkbox-blank-outline") {
+              setMarker("checkbox-marked");
+            } else {
+              setMarker("checkbox-blank-outline");
+            }
+          }}
+        >
+          <MaterialCommunityIcons name={marker} size={24} color="#757281" />
           <Text>Mark All</Text>
-        </View>
+        </TouchableOpacity>
       </View>
       <View>
         <FlatList
@@ -149,6 +155,7 @@ const Home = () => {
               status={item.status}
               title={item.title}
               refno={item.refno}
+              marker={marker}
             />
           )}
         />

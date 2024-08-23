@@ -25,4 +25,5 @@ export interface ListItemComponentProps {
   refno: string;
   from: string;
   to: string;
+  marker: string;
 }
