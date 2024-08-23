@@ -30,16 +30,26 @@ const ListItem: React.FC<ListItemComponentProps> = ({
           <Text style={styles.route}>{to}</Text>
         </View>
       </View>
-      {status === "RECIEVED" && (
-        <Text style={styles.recievedStatus}>{status}</Text>
-      )}
-      {status === "CANCELED" && (
-        <Text style={styles.canceledStatus}>{status}</Text>
-      )}
-      {status === "ERROR" && <Text style={styles.errorStatus}>{status}</Text>}
-      {status === "DELIVERED" && (
-        <Text style={styles.deliveredStatus}>{status}</Text>
-      )}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-start",
+
+          width: 100,
+        }}
+      >
+        {status === "RECIEVED" && (
+          <Text style={styles.recievedStatus}>{status}</Text>
+        )}
+        {status === "CANCELED" && (
+          <Text style={styles.canceledStatus}>{status}</Text>
+        )}
+        {status === "ERROR" && <Text style={styles.errorStatus}>{status}</Text>}
+        {status === "New ShipmentTT" && (
+          <Text style={styles.deliveredStatus}>{status}</Text>
+        )}
+      </View>
+
       <Fontisto name="arrow-resize" size={20} color="#2F50C1" />
     </View>
   );
@@ -53,6 +63,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+    marginVertical: 10,
   },
   routeContainer: {
     flexDirection: "row",
@@ -75,21 +86,25 @@ const styles = StyleSheet.create({
     color: "#4463c8",
     padding: 3,
     borderRadius: 4,
+    textAlign: "left",
   },
   canceledStatus: {
     color: "#e0dee7",
+    textAlign: "left",
   },
   errorStatus: {
     color: "#993037",
     backgroundColor: "#b29f95",
     padding: 3,
     borderRadius: 4,
+    textAlign: "left",
   },
   deliveredStatus: {
     color: "#5A8959",
     backgroundColor: "#9FAF96",
     padding: 3,
     borderRadius: 4,
+    textAlign: "center",
   },
 });
 export default ListItem;

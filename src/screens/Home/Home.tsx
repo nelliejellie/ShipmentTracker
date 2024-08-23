@@ -1,14 +1,51 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
 import { styles } from "./Styles";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import images from "@/assets/images";
 import SearchContainer from "@/components/SearchContainer";
 import IconButton from "@/components/IconButton";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import ListItem from "@/components/ListItem";
+import { useGetShipments } from "@/Networking/hooks/useGetShipments";
 
 const Home = () => {
   const [textSearch, setTextSearch] = useState("");
+  const { getShipments } = useGetShipments();
+  const getData = async () => {
+    const payload = {
+      doctype: "AWB",
+      fields: '["*"]',
+    };
+    const res = await getShipments(payload);
+    const newData = res.message.map((data) => ({
+      from: data.origin_city || "Unknown",
+      to: data.destination_city || "Unknown",
+      status: data.status || "Unknown",
+      title: "AWB",
+      refno: data.name || "N/A",
+    }));
+    setData(newData);
+  };
+  const [data, setData] = useState([
+    {
+      from: "Cairo",
+      to: "Alexandria",
+      status: "DELIVERED",
+      title: "AWB",
+      refno: "123453636",
+    },
+    {
+      from: "New York",
+      to: "Los Angeles",
+      status: "RECIEVED",
+      title: "AWB",
+      refno: "987654321",
+    },
+    // Add more data items as needed
+  ]);
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -62,12 +99,18 @@ const Home = () => {
         </View>
       </View>
       <View>
-        <ListItem
-          from="Cairo"
-          to="Alexandria"
-          status="DELIVERED"
-          title="AWB"
-          refno="123453636"
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.refno}
+          renderItem={({ item }) => (
+            <ListItem
+              from={item.from}
+              to={item.to}
+              status={item.status}
+              title={item.title}
+              refno={item.refno}
+            />
+          )}
         />
       </View>
     </View>
