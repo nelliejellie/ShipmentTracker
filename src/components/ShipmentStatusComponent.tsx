@@ -1,13 +1,14 @@
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import React, { useState } from "react";
 
-const ShipmentStatusComponent = ({ text }: any) => {
+const ShipmentStatusComponent = ({ text, handlePress }: any) => {
   const [glowButton, setGlowButton] = useState(false);
   return (
     <TouchableOpacity
       style={glowButton ? styles.glow : styles.normal}
       onPress={() => {
         setGlowButton(!glowButton);
+        handlePress();
       }}
     >
       <Text style={glowButton ? styles.textGlow : styles.textNormal}>

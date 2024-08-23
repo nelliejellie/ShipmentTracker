@@ -5,9 +5,10 @@ import {
   TouchableOpacity,
   FlatList,
   Modal,
+  RefreshControl,
 } from "react-native";
 import { styles } from "./Styles";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import images from "@/assets/images";
 import SearchContainer from "@/components/SearchContainer";
 import IconButton from "@/components/IconButton";
@@ -15,13 +16,31 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import ListItem from "@/components/ListItem";
 import { useGetShipments } from "@/Networking/hooks/useGetShipments";
 import ShipmentStatusComponent from "@/components/ShipmentStatusComponent";
+import Toast from "react-native-toast-message";
 
 const Home = () => {
   const [textSearch, setTextSearch] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [searchTerms, setSearchTerms] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
   const [marker, setMarker] = useState("checkbox-blank-outline");
   const { getShipments } = useGetShipments();
   const [data, setData] = useState([]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    getData();
+  }, []);
+
+  const handleStatusClick = (text: string) => {
+    setSearchTerms((prevTerms) => {
+      // If the term already exists, don't add it again (optional)
+      if (!prevTerms.includes(text)) {
+        return [...prevTerms, text];
+      }
+      return prevTerms;
+    });
+  };
 
   const filteredData = data.filter(
     (item) =>
@@ -32,19 +51,29 @@ const Home = () => {
   );
 
   const getData = async () => {
-    const payload = {
-      doctype: "AWB",
-      fields: '["*"]',
-    };
-    const res = await getShipments(payload);
-    const newData = res.message.map((data) => ({
-      from: data.origin_city || "Unknown",
-      to: data.destination_city || "Unknown",
-      status: data.status || "Unknown",
-      title: "AWB",
-      refno: data.name || "N/A",
-    }));
-    setData(newData);
+    try {
+      const payload = {
+        doctype: "AWB",
+        fields: '["*"]',
+      };
+      const res = await getShipments(payload);
+      const newData = res.message.map((data) => ({
+        from: data.origin_city || "Unknown",
+        to: data.destination_city || "Unknown",
+        status: data.status || "Unknown",
+        title: "AWB",
+        refno: data.name || "N/A",
+      }));
+      setData(newData);
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text1: "Hello",
+        text2: "An error occurred. Please try again later",
+      });
+    } finally {
+      setRefreshing(false);
+    }
   };
 
   useEffect(() => {
@@ -70,19 +99,50 @@ const Home = () => {
                 <Text style={{ color: "#2F50C1", fontSize: 16 }}>Cancel</Text>
               </TouchableOpacity>
               <Text style={styles.modalText}>Filters</Text>
-              <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <TouchableOpacity
+                onPress={() => {
+                  const d = data.filter((item) =>
+                    searchTerms.some((keyword) =>
+                      item.status.toLowerCase().includes(keyword)
+                    )
+                  );
+                  setData(d);
+                  setModalVisible(false);
+                }}
+              >
                 <Text style={{ color: "#2F50C1", fontSize: 16 }}>Done</Text>
               </TouchableOpacity>
             </View>
             <Text style={styles.shipmentstatusText}>SHIPMENT STATUS</Text>
             <View style={styles.shipmentstatuscontainer}>
-              <ShipmentStatusComponent text="Received" />
-              <ShipmentStatusComponent text="Putaway" />
-              <ShipmentStatusComponent text="Delivered" />
-              <ShipmentStatusComponent text="Canceled" />
-              <ShipmentStatusComponent text="Rejected" />
-              <ShipmentStatusComponent text="Lost" />
-              <ShipmentStatusComponent text="On-hold" />
+              <ShipmentStatusComponent
+                text="Received"
+                handlePress={() => handleStatusClick("Received")}
+              />
+              <ShipmentStatusComponent
+                text="Putaway"
+                handlePress={() => handleStatusClick("Putaway")}
+              />
+              <ShipmentStatusComponent
+                text="Delivered"
+                handlePress={() => handleStatusClick("Delivered")}
+              />
+              <ShipmentStatusComponent
+                text="Canceled"
+                handlePress={() => handleStatusClick("Canceled")}
+              />
+              <ShipmentStatusComponent
+                text="Rejected"
+                handlePress={() => handleStatusClick("Rejected")}
+              />
+              <ShipmentStatusComponent
+                text="Lost"
+                handlePress={() => handleStatusClick("Lost")}
+              />
+              <ShipmentStatusComponent
+                text="On-hold"
+                handlePress={() => handleStatusClick("On-hold")}
+              />
             </View>
           </View>
         </TouchableOpacity>
@@ -158,6 +218,25 @@ const Home = () => {
               marker={marker}
             />
           )}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              colors={["#9Bd35A", "#689F38"]} // Optional: set the colors of the refresh control
+            />
+          }
+          ListEmptyComponent={
+            <TouchableOpacity
+              onPress={() => {
+                getData();
+              }}
+              style={styles.emptyListContainer}
+            >
+              <Text style={styles.emptyListText}>
+                No items available. Tap to reload.
+              </Text>
+            </TouchableOpacity>
+          }
         />
       </View>
     </View>
