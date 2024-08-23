@@ -7,6 +7,7 @@ const Input = ({
   onChangeText,
   style,
   secureTextEntry = false,
+  editable = true,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -24,7 +25,7 @@ const Input = ({
     position: "absolute",
     left: 5,
     top: animatedIsFocused.interpolate({
-      inputRange: [0, 1],
+      inputRange: [1, 1],
       outputRange: [18, 6],
     }),
     fontSize: animatedIsFocused.interpolate({
@@ -43,6 +44,7 @@ const Input = ({
       <TextInput
         value={value}
         onChangeText={onChangeText}
+        editable={editable}
         secureTextEntry={secureTextEntry}
         style={[styles.input, isFocused && styles.inputFocused]}
         onFocus={() => setIsFocused(true)}
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   input: {
-    height: 55,
+    height: 70,
     fontSize: 16,
     color: "#2F50C1",
     borderRadius: 5,

@@ -1,7 +1,8 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, Platform } from "react-native";
 
 const { height: screenHeight } = Dimensions.get("window");
-const containerHeight = screenHeight * 0.4;
+const containerHeightAndroid = screenHeight * 0.4;
+const containerHeightIOS = screenHeight * 0.25;
 
 export const styles = StyleSheet.create({
   container: {
@@ -26,8 +27,9 @@ export const styles = StyleSheet.create({
     backgroundColor: "#2F50C1",
   },
   splashThreeImage: {
-    width: 350,
-    height: 50,
+    width: "90%",
+    height: 40,
+    margin: 10,
   },
   buttonContainer: {
     backgroundColor: "#2F50C1",
@@ -37,7 +39,7 @@ export const styles = StyleSheet.create({
   },
   buttonContainerTwo: {
     flex: 1,
-    height: containerHeight,
+    height: Platform.OS === "ios" ? containerHeightIOS : containerHeightAndroid,
     flexDirection: "column",
     justifyContent: "flex-end",
   },

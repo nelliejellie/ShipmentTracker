@@ -15,10 +15,7 @@ const SplashThree = ({ navigation }) => {
   return (
     <View style={styles.splashThreeContainer}>
       <UpperBar />
-      <Image
-        source={images.shippex} // Path to your local image
-        style={styles.splashThreeImage}
-      />
+      <Image source={images.shippex} style={styles.splashThreeImage} />
     </View>
   );
 };

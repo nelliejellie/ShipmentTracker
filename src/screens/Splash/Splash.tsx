@@ -1,22 +1,41 @@
-import { View, Text, Image } from "react-native";
-import React, { useEffect } from "react";
+import { View, Text, Image, Animated } from "react-native";
+import React, { useEffect, useRef } from "react";
 import { styles } from "./Styles";
 import images from "@/assets/images";
 import { useNavigation } from "@react-navigation/native";
-import UpperBar from "@/components/UpperBar";
 
 const Splash = () => {
   const { navigate } = useNavigation();
+  const scaleValue = useRef(new Animated.Value(0)).current;
+
   useEffect(() => {
-    setTimeout(() => {
-      navigate("SplashTwo");
-    }, 2000);
-  }, []);
+    Animated.timing(scaleValue, {
+      toValue: 1,
+      duration: 1500,
+      useNativeDriver: true,
+    }).start(() => {
+      setTimeout(() => {
+        navigate("SplashTwo");
+      }, 500);
+    });
+  }, [scaleValue, navigate]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     navigate("SplashTwo");
+  //   }, 2000);
+  // }, []);
   return (
     <View style={styles.container}>
-      <Image
-        source={images.splashimageone} // Path to your local image
-        style={styles.splashimage}
+      {/* <Image
+        source={images.splashimageone}
+        style={[styles.splashimage, { transform: [{ scale: scaleValue }] }]}
+      /> */}
+      <Animated.Image
+        source={images.splashimageone} // Ensure this is a valid image source
+        style={[
+          styles.splashimage,
+          { transform: [{ scale: scaleValue }] }, // Apply the animated scale value
+        ]}
       />
     </View>
   );

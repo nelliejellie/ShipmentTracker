@@ -21,7 +21,7 @@ import { ScrollView } from "react-native-gesture-handler";
 const SplashFour = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { postLogin } = UseloginHook();
-  const [url, setUrl] = useState("https://");
+  const [url, setUrl] = useState("https://www.brandimic.com");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [urlError, setUrlError] = useState(true);
@@ -56,6 +56,7 @@ const SplashFour = ({ navigation }) => {
 
     setError(urlError || usernameError || passwordError);
   };
+
   const handleLogin = async () => {
     try {
       setLoading(true);
@@ -110,6 +111,7 @@ const SplashFour = ({ navigation }) => {
                 <Toast />
                 <Input
                   label="URL"
+                  editable={false}
                   value={url}
                   onChangeText={(text: string) =>
                     handleInputChange("url", text)
