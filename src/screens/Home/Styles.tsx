@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 20,
+    backgroundColor: "white",
   },
   header: {
     flexDirection: "row",
@@ -29,6 +30,7 @@ export const styles = StyleSheet.create({
     fontSize: 30,
   },
   iconButtonContainer: {
+    marginTop: 10,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",

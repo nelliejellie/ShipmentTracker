@@ -46,8 +46,9 @@ const ListItem: React.FC<ListItemComponentProps> = ({
           <Text style={styles.deliveredStatus}>{status}</Text>
         )}
       </View>
-
-      <Fontisto name="arrow-resize" size={20} color="#2F50C1" />
+      <View style={{ borderRadius: 50, backgroundColor: "white", padding: 5 }}>
+        <Fontisto name="arrow-resize" size={20} color="#2F50C1" />
+      </View>
     </View>
   );
 };
@@ -55,12 +56,13 @@ const ListItem: React.FC<ListItemComponentProps> = ({
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 67,
+    height: 70,
     backgroundColor: "#F4F2F8",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     marginVertical: 10,
+    borderRadius: 10,
   },
   routeContainer: {
     flexDirection: "row",

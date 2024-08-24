@@ -80,164 +80,166 @@ const Home = () => {
     getData();
   }, []);
   return (
-    <View style={styles.container}>
-      <Modal
-        animationType="slide" // Can be "slide", "fade", or "none"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <TouchableOpacity
-          style={styles.centeredView}
-          onPress={() => setModalVisible(!modalVisible)}
+    <View style={{ flex: 1, backgroundColor: "white" }}>
+      <View style={styles.container}>
+        <Modal
+          animationType="slide" // Can be "slide", "fade", or "none"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
         >
-          <View style={styles.modalView}>
-            <View style={styles.headerModal}>
-              <TouchableOpacity onPress={() => setModalVisible(false)}>
-                <Text style={{ color: "#2F50C1", fontSize: 16 }}>Cancel</Text>
-              </TouchableOpacity>
-              <Text style={styles.modalText}>Filters</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  const d = data.filter((item) =>
-                    searchTerms.some((keyword) =>
-                      item.status.toLowerCase().includes(keyword)
-                    )
-                  );
-                  setData(d);
-                  setModalVisible(false);
-                }}
-              >
-                <Text style={{ color: "#2F50C1", fontSize: 16 }}>Done</Text>
-              </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.centeredView}
+            onPress={() => setModalVisible(!modalVisible)}
+          >
+            <View style={styles.modalView}>
+              <View style={styles.headerModal}>
+                <TouchableOpacity onPress={() => setModalVisible(false)}>
+                  <Text style={{ color: "#2F50C1", fontSize: 16 }}>Cancel</Text>
+                </TouchableOpacity>
+                <Text style={styles.modalText}>Filters</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    const d = data.filter((item) =>
+                      searchTerms.some((keyword) =>
+                        item.status.toLowerCase().includes(keyword)
+                      )
+                    );
+                    setData(d);
+                    setModalVisible(false);
+                  }}
+                >
+                  <Text style={{ color: "#2F50C1", fontSize: 16 }}>Done</Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.shipmentstatusText}>SHIPMENT STATUS</Text>
+              <View style={styles.shipmentstatuscontainer}>
+                <ShipmentStatusComponent
+                  text="Received"
+                  handlePress={() => handleStatusClick("Received")}
+                />
+                <ShipmentStatusComponent
+                  text="Putaway"
+                  handlePress={() => handleStatusClick("Putaway")}
+                />
+                <ShipmentStatusComponent
+                  text="Delivered"
+                  handlePress={() => handleStatusClick("Delivered")}
+                />
+                <ShipmentStatusComponent
+                  text="Canceled"
+                  handlePress={() => handleStatusClick("Canceled")}
+                />
+                <ShipmentStatusComponent
+                  text="Rejected"
+                  handlePress={() => handleStatusClick("Rejected")}
+                />
+                <ShipmentStatusComponent
+                  text="Lost"
+                  handlePress={() => handleStatusClick("Lost")}
+                />
+                <ShipmentStatusComponent
+                  text="On-hold"
+                  handlePress={() => handleStatusClick("On-hold")}
+                />
+              </View>
             </View>
-            <Text style={styles.shipmentstatusText}>SHIPMENT STATUS</Text>
-            <View style={styles.shipmentstatuscontainer}>
-              <ShipmentStatusComponent
-                text="Received"
-                handlePress={() => handleStatusClick("Received")}
-              />
-              <ShipmentStatusComponent
-                text="Putaway"
-                handlePress={() => handleStatusClick("Putaway")}
-              />
-              <ShipmentStatusComponent
-                text="Delivered"
-                handlePress={() => handleStatusClick("Delivered")}
-              />
-              <ShipmentStatusComponent
-                text="Canceled"
-                handlePress={() => handleStatusClick("Canceled")}
-              />
-              <ShipmentStatusComponent
-                text="Rejected"
-                handlePress={() => handleStatusClick("Rejected")}
-              />
-              <ShipmentStatusComponent
-                text="Lost"
-                handlePress={() => handleStatusClick("Lost")}
-              />
-              <ShipmentStatusComponent
-                text="On-hold"
-                handlePress={() => handleStatusClick("On-hold")}
-              />
-            </View>
+          </TouchableOpacity>
+        </Modal>
+        <View style={styles.header}>
+          <Image
+            source={images.man} // Path to your local image
+            style={styles.manImage}
+          />
+          <View>
+            <Text style={styles.textHeader}>S SHIPPEX</Text>
           </View>
-        </TouchableOpacity>
-      </Modal>
-      <View style={styles.header}>
-        <Image
-          source={images.man} // Path to your local image
-          style={styles.manImage}
-        />
-        <View>
-          <Text style={styles.textHeader}>S SHIPPEX</Text>
-        </View>
-        {/* <Image
+          {/* <Image
           source={images.shippex} // Path to your local image
           style={styles.shippeximage}
           resizeMode="cover"
         /> */}
-        <Image
-          source={images.bell} // Path to your local image
-          style={styles.manImage}
-        />
-      </View>
-      <View style={{ marginTop: 10 }}>
-        <Text style={{ color: "#757281" }}>Hello,</Text>
-        <Text style={styles.nameText}>Ibrahim Shaker</Text>
-      </View>
-      <SearchContainer text={textSearch} setText={setTextSearch} />
-      <View style={styles.iconButtonContainer}>
-        <IconButton
-          title="Filters"
-          iconName="Filter"
-          backgroundColor="#F4F2F8"
-          color=""
-          onPress={() => {
-            setModalVisible(true);
-          }}
-        />
-        <IconButton
-          title="Add Scan"
-          iconName="Scan"
-          backgroundColor="#2F50C1"
-          color="#fff"
-          onPress={() => {}}
-        />
-      </View>
-      <View style={styles.shipmentTextContainer}>
-        <Text style={styles.textContainer}>Shipments</Text>
-        <TouchableOpacity
-          style={styles.markContainer}
-          onPress={() => {
-            if (marker === "checkbox-blank-outline") {
-              setMarker("checkbox-marked");
-            } else {
-              setMarker("checkbox-blank-outline");
+          <Image
+            source={images.bell} // Path to your local image
+            style={styles.manImage}
+          />
+        </View>
+        <View style={{ marginTop: 10 }}>
+          <Text style={{ color: "#757281" }}>Hello,</Text>
+          <Text style={styles.nameText}>Ibrahim Shaker</Text>
+        </View>
+        <SearchContainer text={textSearch} setText={setTextSearch} />
+        <View style={styles.iconButtonContainer}>
+          <IconButton
+            title="Filters"
+            iconName="Filter"
+            backgroundColor="#F4F2F8"
+            color=""
+            onPress={() => {
+              setModalVisible(true);
+            }}
+          />
+          <IconButton
+            title="Add Scan"
+            iconName="Scan"
+            backgroundColor="#2F50C1"
+            color="#fff"
+            onPress={() => {}}
+          />
+        </View>
+        <View style={styles.shipmentTextContainer}>
+          <Text style={styles.textContainer}>Shipments</Text>
+          <TouchableOpacity
+            style={styles.markContainer}
+            onPress={() => {
+              if (marker === "checkbox-blank-outline") {
+                setMarker("checkbox-marked");
+              } else {
+                setMarker("checkbox-blank-outline");
+              }
+            }}
+          >
+            <MaterialCommunityIcons name={marker} size={24} color="#757281" />
+            <Text style={{ color: "#2F50C1" }}>Mark All</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <FlatList
+            data={filteredData}
+            keyExtractor={(item) => item.refno}
+            renderItem={({ item }) => (
+              <ListItem
+                from={item.from}
+                to={item.to}
+                status={item.status}
+                title={item.title}
+                refno={item.refno}
+                marker={marker}
+              />
+            )}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                colors={["#9Bd35A", "#689F38"]} // Optional: set the colors of the refresh control
+              />
             }
-          }}
-        >
-          <MaterialCommunityIcons name={marker} size={24} color="#757281" />
-          <Text>Mark All</Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        <FlatList
-          data={filteredData}
-          keyExtractor={(item) => item.refno}
-          renderItem={({ item }) => (
-            <ListItem
-              from={item.from}
-              to={item.to}
-              status={item.status}
-              title={item.title}
-              refno={item.refno}
-              marker={marker}
-            />
-          )}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-              colors={["#9Bd35A", "#689F38"]} // Optional: set the colors of the refresh control
-            />
-          }
-          ListEmptyComponent={
-            <TouchableOpacity
-              onPress={() => {
-                getData();
-              }}
-              style={styles.emptyListContainer}
-            >
-              <Text style={styles.emptyListText}>
-                No items available. Tap to reload.
-              </Text>
-            </TouchableOpacity>
-          }
-        />
+            ListEmptyComponent={
+              <TouchableOpacity
+                onPress={() => {
+                  getData();
+                }}
+                style={styles.emptyListContainer}
+              >
+                <Text style={styles.emptyListText}>
+                  No items available. Tap to reload.
+                </Text>
+              </TouchableOpacity>
+            }
+          />
+        </View>
       </View>
     </View>
   );
