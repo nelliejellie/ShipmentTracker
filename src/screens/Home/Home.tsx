@@ -199,11 +199,7 @@ const Home = () => {
             <Text style={{ color: "#2F50C1" }}>Mark All</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            getData();
-          }}
-        >
+        <View>
           <FlatList
             data={filteredData}
             keyExtractor={(item) => item.refno}
@@ -237,7 +233,7 @@ const Home = () => {
               </TouchableOpacity>
             }
           />
-        </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
