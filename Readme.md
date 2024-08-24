@@ -12,3 +12,11 @@
 
 username - test@brandimic.com
 password - testy123@
+
+### FUNCTIONALITIES TO TEST
+
+- the authentication works. put in the correct username and password
+- the search component works. search by unique words of the list item
+- the filter button works
+- the mark all button works
+- referesh control works. slide the list to referesh
