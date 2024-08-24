@@ -2,7 +2,7 @@
 
 ### HOW TO RUN
 
-- clone the app by running the "git clone" command
+- clone the app by running the "git clone https://github.com/nelliejellie/ShipmentTracker.git" command
 - on your terminal change directory to where the package.json file exists
 - install node modules by running the "npm install" command
 - start the app by running "npm start"
