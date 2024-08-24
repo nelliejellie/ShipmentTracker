@@ -17,6 +17,7 @@ import ListItem from "@/components/ListItem";
 import { useGetShipments } from "@/Networking/hooks/useGetShipments";
 import ShipmentStatusComponent from "@/components/ShipmentStatusComponent";
 import Toast from "react-native-toast-message";
+import ShippexLogo from "@/components/ShippexLogo";
 
 const Home = () => {
   const [textSearch, setTextSearch] = useState("");
@@ -153,14 +154,7 @@ const Home = () => {
             source={images.man} // Path to your local image
             style={styles.manImage}
           />
-          <View>
-            <Text style={styles.textHeader}>S SHIPPEX</Text>
-          </View>
-          {/* <Image
-          source={images.shippex} // Path to your local image
-          style={styles.shippeximage}
-          resizeMode="cover"
-        /> */}
+          <ShippexLogo />
           <Image
             source={images.bell} // Path to your local image
             style={styles.manImage}
